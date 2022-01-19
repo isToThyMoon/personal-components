@@ -12,7 +12,7 @@ interface DialogState {
 
 }
 
-class Dialog extends React.Component<DialogProps, DialogState>{
+export class Dialog extends React.Component<DialogProps, DialogState>{
     el: HTMLDivElement;
 
     constructor(props:DialogProps) {

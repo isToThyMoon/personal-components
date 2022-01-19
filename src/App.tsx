@@ -1,9 +1,10 @@
-import Dialog from  './dialog/Dialog';
+// import Dialog from  './dialog/Dialog';
+import { UseEffectDemo } from './hooks/useEffectDemo';
 
 function App() {
   return (
     <div className="App">
-        <span
+        {/* <span
 			onClick={()=>{
 				Dialog.show({
 					content: <div>hi</div>
@@ -19,7 +20,8 @@ function App() {
 			}}
 		>
 			关闭弹窗
-        </span>
+        </span> */}
+		<UseEffectDemo />
     </div>
   );
 }
