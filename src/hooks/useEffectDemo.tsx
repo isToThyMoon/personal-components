@@ -1,19 +1,29 @@
 import React, { useState ,useEffect, useRef, } from 'react';
 import { useUpdateEffect } from 'ahooks';
 
-// function useOnUpdate(fn: () => void, ...dep:any[]) {
-//     const ref = useRef({ fn, mounted: false })
-//     ref.current.fn = fn;
+type effectHookType = typeof useEffect;
 
-//     useEffect(() => {
-//         // 首次渲染不执行
-//         if (!ref.current.mounted) {
-//         ref.current.mounted = true
-//         } else {
-//         ref.current.fn()
-//         }
-//     }, [dep])
-// }
+const createUpdateEffect = function (hook:effectHookType) {
+  return function (effect, deps) {
+    var isMounted = useRef(false); // for react-refresh
+
+    hook(function () {
+      return function () {
+        isMounted.current = false;
+      };
+    }, []);
+    hook(function () {
+      if (!isMounted.current) {
+        isMounted.current = true;
+      } else {
+        return effect();
+      }
+    }, deps);
+  };
+  
+};
+
+const personalUseUpdateEffect = createUpdateEffect(useEffect);
 
 export const UseEffectDemo:React.FC<{}> = (props) => {
     const [name, setName] = useState('da');
@@ -39,6 +49,10 @@ export const UseEffectDemo:React.FC<{}> = (props) => {
 
     useUpdateEffect(() => {
         console.log('_______updateEffect', name)
+      }, [name]);
+
+    personalUseUpdateEffect(() => {
+        console.log('____++++++personalupdateEffect', name)
       }, [name]);
 
     useUpdateEffect(() => {
