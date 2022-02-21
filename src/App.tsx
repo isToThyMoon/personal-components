@@ -1,5 +1,5 @@
 // import Dialog from  './dialog/Dialog';
-import { UseEffectDemo } from './hooks/useEffectDemo';
+import { UseEffectDemo } from './useEffectDemo';
 
 function App() {
   return (
