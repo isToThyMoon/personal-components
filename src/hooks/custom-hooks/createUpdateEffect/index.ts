@@ -1,5 +1,9 @@
 import { useRef } from 'react';
-export var createUpdateEffect = function createUpdateEffect(hook) {
+import { effectHookType } from '../../model';
+
+
+
+export var createUpdateEffect:(hook: effectHookType) => effectHookType = function createUpdateEffect(hook) {
   return function (effect, deps) {
     var isMounted = useRef(false); // for react-refresh
 
