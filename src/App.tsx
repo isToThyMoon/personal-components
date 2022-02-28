@@ -2,14 +2,16 @@
  * @Author: 王荣
  * @Date: 2022-02-11 14:25:28
  * @LastEditors: 王荣
- * @LastEditTime: 2022-02-28 14:00:49
+ * @LastEditTime: 2022-02-28 14:41:28
  * @Description: 填写简介
  */
+
+import { UseEffectDemo } from "./useEffectDemo";
 
 function App() {
   return (
     <div className="App">
-      <div>App</div>
+      <UseEffectDemo />
     </div>
   );
 }
