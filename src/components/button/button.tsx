@@ -2,11 +2,15 @@
  * @Author: 王荣
  * @Date: 2022-02-28 16:16:36
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-01 16:29:19
+ * @LastEditTime: 2022-03-01 19:49:41
  * @Description: Button组件 分常规button和可跳转的链接类型button
  */
 
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from "react";
+
+import "./_button.scss";
+
+// import classnames from 'classnames';
 
 export type ButtonSize = "sm" | "medium" | "lg";
 export type ButtonType = "primary" | "default" | "danger" | "link";
@@ -33,10 +37,15 @@ export const Button: FC<ButtonProps> = (props) => {
   const { children, className, size, type, htmlType, href, ...resProps } =
     props;
 
+  // const classes = classnames({
+
+  // })
+
   if (type === "link" && href) {
-    return <a></a>;
+    // return <a></a>;
+    return <div></div>;
   } else {
-    return <button></button>;
+    return <button className="dada" {...resProps}></button>;
   }
 };
 
