@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-03-02 14:45:17
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-02 20:54:39
+ * @LastEditTime: 2022-03-03 14:15:16
  * @Description: craco.config.js
  */
 
@@ -45,7 +45,8 @@ module.exports = {
       webpackConfig.output = {
         ...webpackConfig.output,
         ...{
-          filename: whenDev(() => "static/js/bundle.js", "static/js/[name].js"),
+          // filename: whenDev(() => "static/js/bundle.js", "static/js/[name].js"),
+          filename: whenDev(() => "static/js/[name].js", "static/js/[name].js"),
           chunkFilename: "static/js/[name].js",
         },
       };
@@ -77,40 +78,40 @@ module.exports = {
               chunkFilename: "static/css/[name].css",
             });
           }
-          if (plugin instanceof ManifestPlugin) {
-            console.log("************", plugin);
-            Object.assign(plugin.opts, {
-              generate: (seed, files, entrypoints) => {
-                const manifestFiles = files.reduce((manifest, file) => {
-                  manifest[file.name] = file.path;
-                  return manifest;
-                }, seed);
-                // const entrypointFiles = entrypoints.main.filter(
-                //     fileName => !fileName.endsWith('.map')
-                // );
-                // 上面的语句导致入口文件名必须为main；如果重定义入口文件 必须修改它。
-                let entrypointFiles = [];
-
-                let filterUnMap = function (entryFiles) {
-                  return entryFiles.filter(
-                    (fileName) => !fileName.endsWith(".map")
-                  );
-                };
-                // 遍历所有入口文件生成然后再加入entrypointFiles
-                Object.keys(entrypoints).forEach((entry) => {
-                  entrypointFiles.push(filterUnMap(entrypoints[entry]));
-                });
-
-                console.log("!!", entrypointFiles);
-
-                return {
-                  files: manifestFiles,
-                  entrypoints: entrypointFiles,
-                };
-              },
-            });
-          }
         });
+        if (plugin instanceof ManifestPlugin) {
+          Object.assign(plugin.opts, {
+            generate: (seed, files, entrypoints) => {
+              const manifestFiles = files.reduce((manifest, file) => {
+                manifest[file.name] = file.path;
+                return manifest;
+              }, seed);
+              // const entrypointFiles = entrypoints.main.filter(
+              //     fileName => !fileName.endsWith('.map')
+              // );
+              // 上面的语句导致入口文件名必须为main；如果重定义入口文件 必须修改它。
+              let entrypointFiles = [];
+
+              let filterUnMap = function (entryFiles) {
+                return entryFiles.filter(
+                  (fileName) => !fileName.endsWith(".map")
+                );
+              };
+              // 遍历所有入口文件生成然后再加入entrypointFiles
+              Object.keys(entrypoints).forEach((entry) => {
+                entrypointFiles.push(filterUnMap(entrypoints[entry]));
+              });
+
+              console.log("!!", entrypointFiles);
+
+              return {
+                files: manifestFiles,
+                entrypoints: entrypointFiles,
+              };
+            },
+          });
+        }
+
         return plugin;
       });
 
