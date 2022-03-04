@@ -2,14 +2,14 @@
  * @Author: 王荣
  * @Date: 2022-03-02 14:45:17
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-04 09:43:53
+ * @LastEditTime: 2022-03-04 17:35:52
  * @Description: craco.config.js
  */
 
 const CracoLessPlugin = require("craco-less");
 const { whenDev, whenProd, when } = require("@craco/craco");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const fs = require("fs");
 const path = require("path");
 
@@ -67,7 +67,7 @@ module.exports = {
         ...webpackConfig.optimization.splitChunks,
         ...{
           chunks: "all",
-          name: true,
+          name: false,
           // name(module, chunks, cacheGroupKey) {
           //   const moduleFileName = module
           //     .identifier()
@@ -104,8 +104,8 @@ module.exports = {
             });
           }
         });
-        if (plugin instanceof ManifestPlugin) {
-          Object.assign(plugin.opts, {
+        if (plugin instanceof WebpackManifestPlugin) {
+          Object.assign(plugin.options, {
             generate: (seed, files, entrypoints) => {
               const manifestFiles = files.reduce((manifest, file) => {
                 manifest[file.name] = file.path;
