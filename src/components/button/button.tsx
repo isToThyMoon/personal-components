@@ -2,11 +2,12 @@
  * @Author: 王荣
  * @Date: 2022-02-28 16:16:36
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-02 00:28:51
+ * @LastEditTime: 2022-03-04 09:39:31
  * @Description: Button组件 分常规button和可跳转的链接类型button
  */
 
 import { AnchorHTMLAttributes, ButtonHTMLAttributes, FC } from "react";
+import { Button as AntButton } from "antd";
 /* asset */
 import globalConfig from "config";
 import "./_button.scss";
@@ -44,7 +45,11 @@ export const Button: FC<ButtonProps> = (props) => {
 
   if (type === "link" && href) {
     // return <a></a>;
-    return <div></div>;
+    return (
+      <div>
+        <AntButton>dada</AntButton>
+      </div>
+    );
   } else {
     return <button className={classname} {...resProps}></button>;
   }

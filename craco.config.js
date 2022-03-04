@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-03-02 14:45:17
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-03 14:15:16
+ * @LastEditTime: 2022-03-04 09:43:53
  * @Description: craco.config.js
  */
 
@@ -39,6 +39,8 @@ module.exports = {
       // 修改entry
       webpackConfig.entry = {
         app: webpackConfig.entry,
+        button: path.resolve(__dirname, "src/components/button/index.tsx"),
+        // button: './src/components/button/index.tsx'
       };
 
       // 修改 output
@@ -66,6 +68,29 @@ module.exports = {
         ...{
           chunks: "all",
           name: true,
+          // name(module, chunks, cacheGroupKey) {
+          //   const moduleFileName = module
+          //     .identifier()
+          //     .split('/')
+          //     .reduceRight((item) => item);
+          //   const allChunksNames = chunks.map((item) => item.name).join('~');
+          //   return `${cacheGroupKey}-${allChunksNames}-${moduleFileName}`;
+          // },
+          cacheGroups: {
+            backgroundVendor: {
+              name: "app-vendor",
+              chunks: (chunk) => {
+                return chunk.name === "app";
+              },
+            },
+            contentVendor: {
+              name: "button-vendor",
+              chunks: (chunk) => {
+                console.log("********button vendor chunk", chunk);
+                return chunk.name === "button";
+              },
+            },
+          },
         },
       };
 
