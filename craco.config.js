@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-03-05 00:08:18
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-07 00:32:36
+ * @LastEditTime: 2022-03-15 23:11:04
  * @Description: 填写简介
  */
 
@@ -64,7 +64,7 @@ module.exports = {
     configure: (webpackConfig, { env, paths }) => {
       console.log("entry", webpackConfig.entry);
       // 修改统计信息输出
-      webpackConfig.stats = "normal";
+      webpackConfig.stats = "none";
       // 修改entry
       webpackConfig.entry = {
         app: webpackConfig.entry,
