@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:54:18
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-29 21:54:03
+ * @LastEditTime: 2022-03-30 00:11:00
  * @Description: 填写简介
  */
 
@@ -18,7 +18,10 @@ export const Project = () => {
     (state: RootState) => state.Project
   ); //读总状态树里的状态 是总的状态树，这也是为什么selectProjectModalOpen要做一个函数返回
   console.log("重载", count);
-
+  function test() {
+    console.log("test里重载", count);
+  }
+  test();
   useEffect(() => {
     console.log("effectcount", count);
   }, [count]);
@@ -50,8 +53,14 @@ export const Project = () => {
       <button
         onClick={() => {
           console.log("修改redux");
-          dispatch(asyncChange({ step: 3 })).then((count) => {
-            console.log("count promise", count);
+          dispatch(asyncChange({ step: 3 })).then((reduxcount) => {
+            console.log("count promise", reduxcount);
+            console.log("count", count);
+            // 这里的count拿到的不是更新后的3 而是上一次的状态0
+            // 原因其实在 react 的官方文档里面有提到
+            // 组件内部的任何函数，包括事件处理函数和 effect，都是从它被创建的那次渲染中被「看到」的。
+            // 因为这里取count值其实是一个闭包，从这么闭包查找就是那次渲染的值。
+            // 也就是组件内部的函数拿到的总是定义它的那次渲染中的props和state
           });
         }}
       >
