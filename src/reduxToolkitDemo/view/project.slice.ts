@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:37:21
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-29 20:27:26
+ * @LastEditTime: 2022-03-29 21:52:37
  * @Description: 填写简介
  */
 
@@ -46,10 +46,10 @@ export default projectSlice.reducer; // 默认导出reducer 在store中组合成
 
 // 内置了thunk插件，可以直接处理thunk函数
 export const asyncChange = (payload) => (dispatch, getState) => {
-  // const stateBefore = getState()
+  console.log("beforestate", getState());
   dispatch(projectActions.increment(payload)); // dispatch(increment({ step: 2 })); // dispatch派发action
   console.log("state", getState());
-  return Promise.resolve();
+  return Promise.resolve(getState().Project.count);
 };
 
 // Later, dispatch the thunk as needed in the app

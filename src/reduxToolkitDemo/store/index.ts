@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:31:06
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-28 14:53:35
+ * @LastEditTime: 2022-03-29 21:52:05
  * @Description: 填写简介
  */
 
@@ -10,7 +10,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import projectSliceReducer from "../view/project.slice";
 
 export const rootReducer = {
-  ProjectList: projectSliceReducer,
+  Project: projectSliceReducer,
 };
 
 export const store = configureStore({

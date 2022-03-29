@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:54:18
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-29 20:42:48
+ * @LastEditTime: 2022-03-29 21:54:03
  * @Description: 填写简介
  */
 
@@ -15,7 +15,7 @@ export const Project = () => {
   console.log("重载");
   const dispatch = useDispatch<AppDispatch>(); // 不需要再通过高阶组件connect的方法来连接redux的store和组件的属性（props） 直接使用hook引入
   const { projectModalOpen, count } = useSelector(
-    (state: RootState) => state.ProjectList
+    (state: RootState) => state.Project
   ); //读总状态树里的状态 是总的状态树，这也是为什么selectProjectModalOpen要做一个函数返回
   console.log("重载", count);
 
@@ -50,8 +50,8 @@ export const Project = () => {
       <button
         onClick={() => {
           console.log("修改redux");
-          dispatch(asyncChange({ step: 3 })).then(() => {
-            console.log("count", count);
+          dispatch(asyncChange({ step: 3 })).then((count) => {
+            console.log("count promise", count);
           });
         }}
       >
