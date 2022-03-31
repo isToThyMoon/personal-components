@@ -2,14 +2,14 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:54:18
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-30 00:11:00
+ * @LastEditTime: 2022-03-31 21:24:08
  * @Description: 填写简介
  */
 
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
-import { projectActions, asyncChange } from "./project.slice";
+import { projectActions, asyncChange } from "./slice/project-slice";
 
 export const Project = () => {
   console.log("重载");
@@ -22,16 +22,33 @@ export const Project = () => {
     console.log("test里重载", count);
   }
   test();
+
   useEffect(() => {
     console.log("effectcount", count);
   }, [count]);
+
+  useEffect(() => {
+    console.log("每次都执行", count);
+  });
+
+  const measuredRef = useCallback(
+    (node) => {
+      if (node !== null) {
+        console.log(count);
+        console.log("width", node.getBoundingClientRect().width);
+      }
+    },
+    [count]
+  );
 
   console.log("代码结束");
   return (
     // <Provider store={store}>
     <div>
       <div>{String(projectModalOpen)}</div>
-      <div>{String(count)}</div>
+      <div>
+        <span ref={measuredRef}>{String(count)}</span>
+      </div>
       <button
         onClick={() => {
           console.log("修改redux");

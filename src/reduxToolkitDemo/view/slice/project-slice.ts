@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:37:21
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-29 21:52:37
+ * @LastEditTime: 2022-03-31 22:02:09
  * @Description: 填写简介
  */
 
@@ -11,11 +11,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 interface IProjectState {
   projectModalOpen: boolean;
   count: number;
+  testList: any[];
 }
 
 const initialState: IProjectState = {
   projectModalOpen: false,
   count: 0,
+  testList: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
 };
 
 //使用createSlice方法创建一个slice（其实就是reducer）。每一个slice里面包含了reducer和actions，可以实现模块化的封装。所有的相关操作都独立在一个文件中完成。
@@ -35,6 +37,10 @@ export const projectSlice = createSlice({
     increment(state, action: PayloadAction<{ step: number }>) {
       // console.log(action);
       state.count = state.count + action.payload.step; // 内置了immutable
+      const deleteIndex = state.testList.findIndex((item) => {
+        return item === 5;
+      });
+      state.testList.splice(deleteIndex, 1);
     },
   },
   // 这里类比之前原始的rducers 但是不是之前的纯函数 传入actions 比较action.type 返回新的State； toolkit提供更加直观的方式 会通过immer.js(不可变数据)这个库转化为原reducer的写法
