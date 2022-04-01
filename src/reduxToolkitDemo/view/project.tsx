@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-24 22:54:18
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-31 21:24:08
+ * @LastEditTime: 2022-04-01 11:36:01
  * @Description: 填写简介
  */
 
@@ -35,7 +35,12 @@ export const Project = () => {
     (node) => {
       if (node !== null) {
         console.log(count);
+        window.performance.mark("node getBoundingClientReat start");
         console.log("width", node.getBoundingClientRect().width);
+        window.performance.measure(
+          "node getBoundingClientReat end",
+          "node getBoundingClientReat start"
+        );
       }
     },
     [count]
