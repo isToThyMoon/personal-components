@@ -2,11 +2,12 @@
  * @Author: 王荣
  * @Date: 2022-02-28 14:16:16
  * @LastEditors: 王荣
- * @LastEditTime: 2022-02-28 14:49:33
+ * @LastEditTime: 2022-04-05 13:26:42
  * @Description: 填写简介
  */
-import { useEffect, useRef } from "react";
-import { effectHookType } from "../type";
+import { useEffect, useLayoutEffect, useRef } from "react";
+// import { effectHookType } from "../type";
+type effectHookType = typeof useEffect | typeof useLayoutEffect;
 
 export const createUpdateEffect = function createUpdateEffect(
   hook: effectHookType

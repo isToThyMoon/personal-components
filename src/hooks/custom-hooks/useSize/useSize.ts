@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-03-31 22:40:41
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-31 22:40:42
+ * @LastEditTime: 2022-04-05 22:25:56
  * @Description: 填写简介
  */
 
@@ -24,7 +24,8 @@ function useSize(target: BasicTarget): Size | undefined {
       if (!el) {
         return;
       }
-
+      // ResizeObserver监控的是元素content box的尺寸变化 如果改变border padding 它是不会触发的
+      //entry.contentRect获取各种尺寸
       const resizeObserver = new ResizeObserver((entries) => {
         entries.forEach((entry) => {
           const { clientWidth, clientHeight } = entry.target;
