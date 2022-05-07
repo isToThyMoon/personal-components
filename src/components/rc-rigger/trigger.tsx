@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-04-26 21:35:54
  * @LastEditors: 王荣
- * @LastEditTime: 2022-04-26 23:16:46
+ * @LastEditTime: 2022-04-29 22:11:20
  * @Description: 填写简介
  */
 
@@ -11,9 +11,12 @@ import Portal from "components/util/portal";
 import TriggerContext from "./context";
 
 interface TriggerProps {
-  popupVisible: boolean;
-  defaultPopupVisible: boolean;
+  popupVisible?: boolean;
+  defaultPopupVisible?: boolean;
   prefixCls?: string;
+  popup: React.ReactNode | (() => React.ReactNode);
+  onPopupVisibleChange?: (visible: boolean) => void;
+  getPopupContainer?: (node: HTMLElement) => HTMLElement;
 }
 
 interface TriggerState {

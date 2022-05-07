@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-02-28 16:16:36
  * @LastEditors: 王荣
- * @LastEditTime: 2022-03-04 09:39:31
+ * @LastEditTime: 2022-05-07 16:47:36
  * @Description: Button组件 分常规button和可跳转的链接类型button
  */
 
@@ -20,9 +20,11 @@ export type ButtonType = "primary" | "default" | "danger" | "link";
 interface BaseButtonProps {
   children: React.ReactNode;
   className?: string;
+  overlayStyle?: React.CSSProperties;
   size?: ButtonSize;
   type?: ButtonType;
   htmlType?: ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  icon?: React.ReactElement;
 
   href?: string;
 }
@@ -38,10 +40,22 @@ export type ButtonProps = Partial<CombineButtonProps & AnchorButtonProps>;
 const classPrefix = globalConfig.componentPrefix;
 
 export const Button: FC<ButtonProps> = (props) => {
-  const { children, className, size, type, htmlType, href, ...resProps } =
-    props;
+  const {
+    children,
+    className,
+    overlayStyle,
+    size = "medium",
+    type = "default",
+    htmlType,
+    icon,
+    href,
+    ...resProps
+  } = props;
 
-  const classname = classnames(classPrefix + "-btn", className, {});
+  const classname = classnames(classPrefix + "-btn", className, {
+    [classPrefix + "-btn-" + size]: size,
+    [classPrefix + "-btn-" + type]: type,
+  });
 
   if (type === "link" && href) {
     // return <a></a>;
@@ -51,7 +65,17 @@ export const Button: FC<ButtonProps> = (props) => {
       </div>
     );
   } else {
-    return <button className={classname} {...resProps}></button>;
+    return (
+      <button
+        className={classname}
+        style={overlayStyle}
+        type={htmlType}
+        {...resProps}
+      >
+        {icon && <span className="icon-affix">{icon}</span>}
+        {children}
+      </button>
+    );
   }
 };
 

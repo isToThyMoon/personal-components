@@ -2,7 +2,7 @@
  * @Author: 王荣
  * @Date: 2022-04-26 21:37:34
  * @LastEditors: 王荣
- * @LastEditTime: 2022-04-26 21:37:35
+ * @LastEditTime: 2022-04-29 22:48:11
  * @Description: 填写简介
  */
 import type * as React from "react";
@@ -31,7 +31,7 @@ const Portal = forwardRef<PortalRef, PortalProps>((props, ref) => {
   const initRef = useRef(false);
   if (!initRef.current && canUseDom()) {
     containerRef.current = getContainer();
-    parentRef.current = containerRef.current.parentNode;
+    parentRef.current = containerRef.current.parentNode as ParentNode;
     initRef.current = true;
   }
 
@@ -45,10 +45,10 @@ const Portal = forwardRef<PortalRef, PortalProps>((props, ref) => {
     // React 18 StrictMode will unmount first and mount back for effect test:
     // https://reactjs.org/blog/2022/03/29/react-v18.html#new-strict-mode-behaviors
     if (
-      containerRef.current.parentNode === null &&
+      containerRef.current?.parentNode === null &&
       parentRef.current !== null
     ) {
-      parentRef.current.appendChild(containerRef.current);
+      parentRef.current?.appendChild(containerRef.current);
     }
     return () => {
       // [Legacy] This should not be handle by Portal but parent PortalWrapper instead.
