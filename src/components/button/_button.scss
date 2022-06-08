@@ -1,0 +1,139 @@
+@import '/src/config.scss';
+
+// 通用样式
+.#{$prefix}-btn {
+  cursor: pointer;
+  
+  &-sm{
+    height: 30px;
+    font-size: 12px;
+    line-height: 18px;
+
+    padding: 0 15px 0 15px;
+    border-radius: 3px;
+  }
+
+  &-medium{
+    height: 33px;
+    font-size: 14px;
+    line-height: 21px;
+
+    padding: 0 15px 0 15px;
+    border-radius: 4px;
+    .icon-affix{
+      margin-right: 3px;
+      // height: 14px;
+      height: 21px;
+      font-size: 14px;
+      // line-height: 14px;
+      line-height: 21x;
+    }
+
+  }
+
+}
+
+// .#{$prefix}-btn-cancel{
+.#{$prefix}-btn-default{
+  display: inline-flex;
+  align-items: center;
+  color: #222222;
+  background: #F5F7FA;
+  border: 1px solid #CED3D9;
+  box-shadow: none;
+  text-shadow: none;
+  &:hover{
+      color: #222222;
+      background: #E6ECF2;
+      border: 1px solid #CED3D9;
+  } 
+}
+
+// .#{$prefix}-btn-default{
+.#{$prefix}-btn-primary{
+  
+  display: inline-flex;
+  align-items: center;
+  color: #fff;
+  background: #415BF2;
+  border: 1px solid #415BF2;
+
+  &:hover{
+      color: #fff;
+      background: #3344E1;
+      border: 1px solid #3344E1;
+  }
+
+  &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:hover{
+          background: #415BF2;
+          border: 1px solid #415BF2;
+      }
+  }
+
+}
+
+.#{$prefix}-btn-gray{
+  display: inline-flex;
+  align-items: center;
+  color: #415BF2;
+  background: rgba(#DEE2FF, 0.53);
+  border: 1px solid rgba(#415bf2, 0.53);
+
+  &:hover{
+      color: #415BF2;
+      background: #DEE2FF;
+      border: 1px solid #415BF2;
+  }
+  
+}
+
+.#{$prefix}-btn-function{
+  color: #fff;
+  background: #4A59E1;
+  border: 1px solid #4A59E1;
+
+  &:hover{
+      color: #fff;
+      background: #3344E1;
+      border: 1px solid #3344E1;
+  }
+
+  &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:hover{
+          background: #4A59E1;
+          border: 1px solid #4A59E1;
+      }
+  }
+
+  &-icon{
+      margin-right: 5px;
+  }
+  
+}
+
+.#{$prefix}-btn-simple{
+  color: #415BF2;
+  background: #FFFFFF;
+  border: 1px solid #415BF2;
+
+  &:hover{
+      color: #415BF2;
+      background: #FFFFFF;
+      border: 1px solid #415BF2;
+  }
+
+  &:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      &:hover{
+          background: #FFFFFF;
+          border: 1px solid #415BF2;
+      }
+  }
+  
+}

@@ -1,0 +1,17 @@
+
+.custom-tooltip{
+    
+  //tooltip inner文字设置
+  .ant-tooltip-inner {
+      color: #555555;
+      border-radius: 3px;
+      font-size: 12px;
+      line-height: 18px;
+  }
+
+}
+
+// 全局antd tooltip border radius 设置
+.ant-tooltip-inner {
+  border-radius: 3px;
+}
