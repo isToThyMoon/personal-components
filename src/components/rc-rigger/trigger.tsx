@@ -2,8 +2,8 @@
  * @Author: 王荣
  * @Date: 2022-04-26 21:35:54
  * @LastEditors: 王荣
- * @LastEditTime: 2022-04-29 22:11:20
- * @Description: 填写简介
+ * @LastEditTime: 2022-08-10 08:39:06
+ * @Description: react component - trigger的仿写理解
  */
 
 import React, { HTMLAttributes } from "react";
@@ -45,31 +45,26 @@ export function generateTrigger(
       };
     }
 
-    // attachParent = (popupContainer: HTMLElement) => {
-    //   raf.cancel(this.attachId);
+    static getDerivedStateFromProps(
+      { popupVisible }: TriggerProps,
+      prevState: TriggerState
+    ) {
+      const newState: Partial<TriggerState> = {};
 
-    //   const { getPopupContainer, getDocument } = this.props;
-    //   const domNode = this.getRootDomNode();
+      if (
+        popupVisible !== undefined &&
+        prevState.popupVisible !== popupVisible
+      ) {
+        newState.popupVisible = popupVisible;
+        newState.prevPopupVisible = prevState.popupVisible;
+      }
 
-    //   let mountNode: HTMLElement;
-    //   if (!getPopupContainer) {
-    //     mountNode = getDocument(this.getRootDomNode()).body;
-    //   } else if (domNode || getPopupContainer.length === 0) {
-    //     // Compatible for legacy getPopupContainer with domNode argument.
-    //     // If no need `domNode` argument, will call directly.
-    //     // https://codesandbox.io/s/eloquent-mclean-ss93m?file=/src/App.js
-    //     mountNode = getPopupContainer(domNode);
-    //   }
+      return newState;
+    }
 
-    //   if (mountNode) {
-    //     mountNode.appendChild(popupContainer);
-    //   } else {
-    //     // Retry after frame render in case parent not ready
-    //     this.attachId = raf(() => {
-    //       this.attachParent(popupContainer);
-    //     });
-    //   }
-    // };
+    componentDidMount() {
+      // this.componentDidUpdate();
+    }
 
     getContainer = () => {
       // if (!this.portalContainer) {
@@ -165,23 +160,6 @@ export function generateTrigger(
 
     triggerContextValue = { onPopupMouseDown: this.onPopupMouseDown };
 
-    static getDerivedStateFromProps(
-      { popupVisible }: TriggerProps,
-      prevState: TriggerState
-    ) {
-      const newState: Partial<TriggerState> = {};
-
-      if (
-        popupVisible !== undefined &&
-        prevState.popupVisible !== popupVisible
-      ) {
-        newState.popupVisible = popupVisible;
-        newState.prevPopupVisible = prevState.popupVisible;
-      }
-
-      return newState;
-    }
-
     render() {
       const { popupVisible } = this.state;
       const { children } = this.props;
@@ -211,10 +189,6 @@ export function generateTrigger(
           {portal}
         </TriggerContext.Provider>
       );
-    }
-
-    componentDidMount() {
-      // this.componentDidUpdate();
     }
   };
 }

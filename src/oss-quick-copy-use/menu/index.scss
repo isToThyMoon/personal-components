@@ -1,0 +1,24 @@
+
+.memu-title{
+
+}
+
+.menu{
+  // display: none;
+  width: 200px;
+  list-style: none;
+  background: beige;
+  overflow: hidden;
+  height: 0;
+  transition: height 0.3s ease, opacity 0.6s ease;
+
+  &-open{
+    // display: inline-block;
+    transition: height 0.3s ease, opacity 0.6s ease;
+
+  }
+
+  &-item{
+    list-style: none;
+  }
+}
